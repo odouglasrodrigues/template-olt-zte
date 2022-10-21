@@ -24,7 +24,7 @@ def GetPonNameInfo():
     return shellcmd.read().splitlines()
 
 
-def GetOntSignalMinMaxAndMidle(PonInfo):
+def GetOntSignalMinMaxAndMidle(PonInfo, pon):
     sinais = []
     for linha in PonInfo:
         if "dbm" in linha:
@@ -35,8 +35,14 @@ def GetOntSignalMinMaxAndMidle(PonInfo):
         media = statistics.median_grouped(sinais)
         melhor = max(sinais)
         pior = min(sinais)
-        print(
-            f"Melhor sinal: {melhor} || Pior sinal: {pior} || Sinal médio: {media}")
+
+        os.system(f'zabbix_sender -z zabbix -s "{hostname}" -k OntBestSinal.[{pon}] -o {melhor}')
+        time.sleep(1)
+        os.system(f'zabbix_sender -z zabbix -s "{hostname}" -k OntPoorSinal.[{pon}] -o {pior}')
+        time.sleep(1)
+        os.system(f'zabbix_sender -z zabbix -s "{hostname}" -k OntMediaSinal.[{pon}] -o {media}')
+        time.sleep(1)
+        
 
 
 def ConnectOnOLTWithTelnet(ip, user, password, port):
@@ -66,8 +72,7 @@ def ConnectOnOLTWithTelnet(ip, user, password, port):
         return_interfaceList = tn.read_until(
             'Control flag'.encode('utf-8'), 3).decode('utf-8').splitlines()
 
-        print(f'PON: {pon}')
-        GetOntSignalMinMaxAndMidle(return_interfaceList)
+        GetOntSignalMinMaxAndMidle(return_interfaceList, pon)
 
     tn.write(b"exit\n")
     time.sleep(.3)
@@ -83,6 +88,8 @@ ip = sys.argv[1]
 user = sys.argv[2]
 password = sys.argv[3]
 port = sys.argv[4]
+hostname = sys.argv[5]
+
 
 if __name__ == "__main__":
     main(ip, user, password, port)

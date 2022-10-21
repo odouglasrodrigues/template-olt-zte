@@ -23,14 +23,17 @@ def GetPonNameInfo():
     return shellcmd.read().splitlines()
 
 
-def GetOntProvisionedAndOntOnline(PonInfo):
+def GetOntProvisionedAndOntOnline(PonInfo, pon):
     for linha in PonInfo:
         if "ONU Number" in linha:
             onuOnline = int(linha.split(':')[1].split('/')[0].replace(" ", ""))
             onuProvisioned = int(linha.split(
                 ':')[1].split('/')[1].replace(" ", ""))
-            print(
-                f"Onu Online: {onuOnline} || Onu Provisionada: {onuProvisioned}")
+            
+            os.system(f'zabbix_sender -z zabbix -s "{hostname}" -k OntOnline.[{pon}] -o {onuOnline}')
+            time.sleep(1)
+            os.system(f'zabbix_sender -z zabbix -s "{hostname}" -k OntProvisioned.[{pon}] -o {onuProvisioned}')
+            time.sleep(1)
 
 
 def ConnectOnOLTWithTelnet(ip, user, password, port):
@@ -60,8 +63,7 @@ def ConnectOnOLTWithTelnet(ip, user, password, port):
         return_interfaceList = tn.read_until(
             'Control flag'.encode('utf-8'), 3).decode('utf-8').splitlines()
 
-        print(f'PON: {pon}')
-        GetOntProvisionedAndOntOnline(return_interfaceList)
+        GetOntProvisionedAndOntOnline(return_interfaceList, pon)
 
     tn.write(b"exit\n")
     time.sleep(.3)
@@ -77,6 +79,7 @@ ip = sys.argv[1]
 user = sys.argv[2]
 password = sys.argv[3]
 port = sys.argv[4]
+hostname = sys.argv[5]
 
 if __name__ == "__main__":
     main(ip, user, password, port)
