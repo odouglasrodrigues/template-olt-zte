@@ -4,9 +4,7 @@
 import os
 import time
 import telnetlib
-import json
 import sys
-import re
 import statistics
 
 
