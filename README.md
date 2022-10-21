@@ -1,4 +1,4 @@
-# Monitoramento OLT Huawei
+# Monitoramento OLT ZTE
 ##### Zabbix 5.4 +
 ##### ZTE C300 
 
