@@ -8,8 +8,8 @@ import sys
 
 
 pons = []
-TotalOntOnline = 0
-TotalOntProvisioned = 0
+TotalOntOnline = []
+TotalOntProvisioned = []
 
 
 def OrgnnizePonName(dataPonsTotal):
@@ -32,8 +32,8 @@ def GetOntProvisionedAndOntOnline(PonInfo, pon):
             onuProvisioned = int(linha.split(
                 ':')[1].split('/')[1].replace(" ", ""))
 
-            TotalOntOnline = TotalOntOnline+onuOnline
-            TotalOntProvisioned = TotalOntProvisioned+onuProvisioned
+            TotalOntOnline.append(onuOnline)
+            TotalOntProvisioned.append(onuProvisioned)
 
             os.system(
                 f'zabbix_sender -z zabbix -s "{hostname}" -k OntOnline.[{pon}] -o {onuOnline}')
@@ -81,10 +81,10 @@ def ConnectOnOLTWithTelnet(ip, user, password, port):
 def main(ip, user, password, port):
     ConnectOnOLTWithTelnet(ip, user, password, port)
     os.system(
-        f'zabbix_sender -z zabbix -s "{hostname}" -k TotalOntOnline -o {TotalOntOnline}')
+        f'zabbix_sender -z zabbix -s "{hostname}" -k TotalOntOnline -o {sum(TotalOntOnline)}')
     time.sleep(1)
     os.system(
-        f'zabbix_sender -z zabbix -s "{hostname}" -k TotalOntProvisioned -o {TotalOntProvisioned}')
+        f'zabbix_sender -z zabbix -s "{hostname}" -k TotalOntProvisioned -o {sum(TotalOntProvisioned)}')
     time.sleep(1)
 
 
