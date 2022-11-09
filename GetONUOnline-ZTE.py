@@ -19,8 +19,8 @@ def OrgnnizePonName(dataPonsTotal):
             pons.append(pon)
 
 
-def GetPonNameInfo():
-    cmd = "snmpwalk -v2c -c public 190.123.65.230:65161 iso.3.6.1.2.1.31.1.1.1.1 | grep gpon_"
+def GetPonNameInfo(ip):
+    cmd = f'snmpwalk -v2c -c public {ip} iso.3.6.1.2.1.31.1.1.1.1 | grep gpon_'
     shellcmd = os.popen(cmd)
     return shellcmd.read().splitlines()
 
@@ -44,7 +44,7 @@ def GetOntProvisionedAndOntOnline(PonInfo, pon):
 
 
 def ConnectOnOLTWithTelnet(ip, user, password, port):
-    OrgnnizePonName(GetPonNameInfo())
+    OrgnnizePonName(GetPonNameInfo(ip))
 
     try:
         tn = telnetlib.Telnet(ip, port, 10)
