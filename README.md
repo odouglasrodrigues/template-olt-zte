@@ -5,6 +5,15 @@
 
 #### Baixe os arquivos .py e os coloque em: /usr/lib/zabbix/externalscripts/
 
+```sh
+cd /tmp
+git clone https://github.com/odouglasrodrigues/template-olt-zte.git
+cd template-olt-zte
+mv *.py /usr/lib/zabbix/externalscripts/
+
+
+```
+
 ##### Dê permissão de execução:
 #
 ```sh
