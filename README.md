@@ -3,6 +3,12 @@
 ##### ZTE C300 
 
 
+#### Faça a instalação das dependencias necessárias
+
+```sh
+apt install git snmp python3 zabbix-sender -y
+
+```
 #### Baixe os arquivos .py e os coloque em: /usr/lib/zabbix/externalscripts/
 
 ```sh
