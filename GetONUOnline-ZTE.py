@@ -86,6 +86,9 @@ def main(ip, user, password, port):
     os.system(
         f'zabbix_sender -z zabbix -s "{hostname}" -k TotalOntProvisioned -o {sum(TotalOntProvisioned)}')
     time.sleep(1)
+    os.system(
+        f'zabbix_sender -z zabbix -s "{hostname}" -k TotalOntOffline -o {sum(TotalOntProvisioned)-sum(TotalOntOnline)}')
+    time.sleep(1)
 
 
 ip = sys.argv[1]
