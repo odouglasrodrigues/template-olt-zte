@@ -41,6 +41,9 @@ def GetOntProvisionedAndOntOnline(PonInfo, pon):
             os.system(
                 f'zabbix_sender -z zabbix -s "{hostname}" -k OntProvisioned.[{pon}] -o {onuProvisioned}')
             time.sleep(1)
+            os.system(
+                f'zabbix_sender -z zabbix -s "{hostname}" -k OntOffline.[{pon}] -o {onuProvisioned-onuOnline}')
+            time.sleep(1)
 
 
 def ConnectOnOLTWithTelnet(ip, user, password, port):
