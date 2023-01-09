@@ -30,7 +30,7 @@ def main(ip, community):
 
     export = {"data": []}
 
-    cmd = 'snmpwalk -v 2c -c {} {}:65161 1.3.6.1.2.1.31.1.1.1.1 | grep -i "gpon"'.format(
+    cmd = 'snmpwalk -v 2c -c {} {} 1.3.6.1.2.1.31.1.1.1.1 | grep -i "gpon"'.format(
         community, ip)
     return_snmpwalk = os.popen(cmd).read().splitlines()
 
