@@ -6,6 +6,7 @@
 #### Faça a instalação das dependencias necessárias
 
 ```sh
+apt update
 apt install git snmp python3 zabbix-sender -y
 
 ```
