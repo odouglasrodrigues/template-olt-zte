@@ -51,7 +51,7 @@ def main(ip, community):
         })
 
     print(json.dumps(export))
-    # CronModify(ip, user, password, port, hostname)
+    CronModify(ip, user, password, port, hostname)
     return
 
 

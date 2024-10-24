@@ -10,7 +10,7 @@
     </groups>
     <templates>
         <template>
-            <uuid>f0dc8a807d664224ba8c7a218cf14986</uuid>
+            <uuid>f0dc8a807d664224ba8c7a518cf14946</uuid>
             <template>OLT ZTE - C600 - PON Monitoring</template>
             <name>OLT ZTE - C600 - PON Monitoring</name>
             <groups>
@@ -20,7 +20,7 @@
             </groups>
             <items>
                 <item>
-                    <uuid>059c3c8ab8ea4793a296a234ded101a7</uuid>
+                    <uuid>059c3c8ab8da4793a296a234ded101a7</uuid>
                     <name>Total de ONUs Online</name>
                     <type>TRAP</type>
                     <key>TotalOntOnline</key>
@@ -29,7 +29,7 @@
                     <trends>45d</trends>
                 </item>
                 <item>
-                    <uuid>b806fc7337074b2d9c765dfa609ea21f</uuid>
+                    <uuid>b806fc7337054b2d9c765dfa609ea21f</uuid>
                     <name>Total de ONUs Provisionadas</name>
                     <type>TRAP</type>
                     <key>TotalOntProvisioned</key>
@@ -40,14 +40,14 @@
             </items>
             <discovery_rules>
                 <discovery_rule>
-                    <uuid>0e7cfbfb7f474bc88681a52815879991</uuid>
+                    <uuid>0e7cfbfb7f454bc88681a52815879991</uuid>
                     <name>PONs Discovery</name>
                     <type>EXTERNAL</type>
                     <key>GetPONName-C600-ZTE.py[{HOST.CONN}, {$SNMP_COMMUNITY}, '{HOST.HOST}', {$OLT_USER_TELNET}, {$OLT_PASS_TELNET}, {$OLT_PORT_TELNET}]</key>
                     <delay>10m</delay>
                     <item_prototypes>
                         <item_prototype>
-                            <uuid>65337a6b480041ecad62ae238d7aa447</uuid>
+                            <uuid>65337a6b480041e5ad62ae238d7aa447</uuid>
                             <name>Melhor Sinal - {#PONNAME}-({#PONALIAS})</name>
                             <type>TRAP</type>
                             <key>OntBestSinal.[{#PONNAME}]</key>
@@ -58,7 +58,7 @@
                             <units>dBm</units>
                         </item_prototype>
                         <item_prototype>
-                            <uuid>e261e896995741048d41e46d37e2ce2f</uuid>
+                            <uuid>e261e896995541048d41e46d37e2ce2f</uuid>
                             <name>Média de Sinal - {#PONNAME}-({#PONALIAS})</name>
                             <type>TRAP</type>
                             <key>OntMediaSinal.[{#PONNAME}]</key>
@@ -69,13 +69,13 @@
                             <units>dBm</units>
                             <trigger_prototypes>
                                 <trigger_prototype>
-                                    <uuid>ebc3e839100c42b1a93b6f5b90bf7f83</uuid>
+                                    <uuid>ebc3e839100c42b1593b6f5b90bf7f83</uuid>
                                     <expression>last(/OLT ZTE - C600 - PON Monitoring/OntMediaSinal.[{#PONNAME}])&lt; -30</expression>
                                     <name>Média de sinal PÉSSIMO  {ITEM.LASTVALUE} - {#PONNAME}-({#PONALIAS})</name>
                                     <priority>HIGH</priority>
                                 </trigger_prototype>
                                 <trigger_prototype>
-                                    <uuid>13f2b7983bfc4557a914f5b02ff48b9f</uuid>
+                                    <uuid>13f2b7983bf54557a914f5b02ff48b9f</uuid>
                                     <expression>last(/OLT ZTE - C600 - PON Monitoring/OntMediaSinal.[{#PONNAME}])&lt; -27</expression>
                                     <name>Média de sinal RUIM  {ITEM.LASTVALUE} - {#PONNAME}-({#PONALIAS})</name>
                                     <priority>AVERAGE</priority>
@@ -89,7 +89,7 @@
                             </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
-                            <uuid>6527a0d6e27d4719ae8f50eb561947e2</uuid>
+                            <uuid>6527a0d5e27d4719ae8f50eb561947e2</uuid>
                             <name>ONUs Online - {#PONNAME}-({#PONALIAS})</name>
                             <type>TRAP</type>
                             <key>OntOnline.[{#PONNAME}]</key>
@@ -98,7 +98,7 @@
                             <trends>45d</trends>
                             <trigger_prototypes>
                                 <trigger_prototype>
-                                    <uuid>5cd6e402eea1449590681d83bbf3baf7</uuid>
+                                    <uuid>5cd6e402eea1449550681d83bbf3baf7</uuid>
                                     <expression>last(/OLT ZTE - C600 - PON Monitoring/OntOnline.[{#PONNAME}])&lt; avg(/OLT ZTE - C600 - PON Monitoring/OntOnline.[{#PONNAME}],60m)-10</expression>
                                     <name>Queda de ONUs superior à 10  - {#PONNAME}-({#PONALIAS})</name>
                                     <priority>AVERAGE</priority>
@@ -115,7 +115,7 @@
                                     </dependencies>
                                 </trigger_prototype>
                                 <trigger_prototype>
-                                    <uuid>2223ecccd3c24d2783a07effa9db728f</uuid>
+                                    <uuid>2223ecccd3c24d2785a07effa9db728f</uuid>
                                     <expression>last(/OLT ZTE - C600 - PON Monitoring/OntOnline.[{#PONNAME}])&lt; avg(/OLT ZTE - C600 - PON Monitoring/OntOnline.[{#PONNAME}],60m)-30</expression>
                                     <name>Queda de ONUs superior à 30  - {#PONNAME}-({#PONALIAS})</name>
                                     <priority>AVERAGE</priority>
@@ -128,7 +128,7 @@
                                     </dependencies>
                                 </trigger_prototype>
                                 <trigger_prototype>
-                                    <uuid>487d70dfc32a4cfcba6fa3f316561668</uuid>
+                                    <uuid>487d70dfc32a4cfcba6fa5f316561668</uuid>
                                     <expression>last(/OLT ZTE - C600 - PON Monitoring/OntOnline.[{#PONNAME}])&lt; avg(/OLT ZTE - C600 - PON Monitoring/OntOnline.[{#PONNAME}],60m)-50</expression>
                                     <name>Queda de ONUs superior à 50  - {#PONNAME}-({#PONALIAS})</name>
                                     <priority>HIGH</priority>
@@ -137,7 +137,7 @@
                             </trigger_prototypes>
                         </item_prototype>
                         <item_prototype>
-                            <uuid>8d1f66ec32c14e40af0d61d095ac31b0</uuid>
+                            <uuid>8d1f66ec32c14e40af0561d095ac31b0</uuid>
                             <name>Pior Sinal - {#PONNAME}-({#PONALIAS})</name>
                             <type>TRAP</type>
                             <key>OntPoorSinal.[{#PONNAME}]</key>
@@ -148,7 +148,7 @@
                             <units>dBm</units>
                         </item_prototype>
                         <item_prototype>
-                            <uuid>9ddfc5234a5e44849a32f27ef60a2fc7</uuid>
+                            <uuid>9ddfc5234a5544849a32f27ef60a2fc7</uuid>
                             <name>ONUs Provisionadas - {#PONNAME}-({#PONALIAS})</name>
                             <type>TRAP</type>
                             <key>OntProvisioned.[{#PONNAME}]</key>
@@ -159,7 +159,7 @@
                     </item_prototypes>
                     <graph_prototypes>
                         <graph_prototype>
-                            <uuid>b4125ceec21447d9aedcf988d930e5eb</uuid>
+                            <uuid>b4125ceec21447d95edcf988d930e5eb</uuid>
                             <name>Sinal PON - {#PONNAME}</name>
                             <graph_items>
                                 <graph_item>
@@ -209,7 +209,7 @@
     </templates>
     <graphs>
         <graph>
-            <uuid>db5afc4f803548d2a2eaed8ae0cd4b44</uuid>
+            <uuid>db5afc4f803548d2a25aed8ae0cd4b44</uuid>
             <name>ONUs Provisionadas x ONUs Online</name>
             <graph_items>
                 <graph_item>
